@@ -44,7 +44,7 @@ RefBridge is an AI-powered referral management and patient-activation platform f
 2. **Buy a domain** → gives somewhere to host a business website
 3. **Minimal website with Privacy Policy + Terms & Conditions pages**
 4. **Submit Twilio toll-free verification** with the above → few business days for approval → real SMS delivery finally works (scenario itself needs no changes)
-5. **Real fax intake** — `email_watcher.py` exists (downloads PDF attachments from a mailbox via IMAP, feeds them into the same extraction pipeline) but has only been tested against a synthetic in-memory email, never a live mailbox. Needs: a HIPAA-compliant cloud fax provider with a signed BAA that delivers incoming faxes as PDF email attachments, and a BAA-covered email inbox (Google Workspace/Microsoft 365 paid tier) for that provider to deliver to.
+5. **Real fax intake** — lives in its own repo now, **not** in RefBridge-api: [`refbridge-fax-intake`](https://github.com/Jxsiuh/refbridge-fax-intake) (private). It watches a mailbox via IMAP and forwards each PDF attachment to the same Make.com webhook this repo's scenario already uses (extraction/Airtable/Twilio all stay here, unchanged). Only the attachment-parsing and webhook-forwarding logic is tested (synthetic email, mocked webhook call) — the live IMAP connection has never touched a real mailbox. Still needs: a HIPAA-compliant cloud fax provider with a signed BAA that delivers incoming faxes as PDF email attachments, and a BAA-covered email inbox (Google Workspace/Microsoft 365 paid tier) for that provider to deliver to.
 
 ## Working style Josiah prefers
 
